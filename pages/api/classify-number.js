@@ -62,10 +62,11 @@ export default async function handler(req, res) {
   const { number } = req.query;
 
   // Validate the input to ensure it is provided and is a valid integer
-  if (number === undefined || !Number.isInteger(Number(number))) {
-    return res.status(400).json({ number, error: true });
+  if (number === undefined || number === '' ) {
+    return res.status(400).json({ number: null, error: true });
   }
-
+  else if ( isNaN(number) || !Number.isInteger(Number(number))){
+    return res.status(400).json({ number: number, error: true });}
   // Parse the number
   const num = parseInt(number);
 
