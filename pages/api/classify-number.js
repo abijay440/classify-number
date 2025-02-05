@@ -29,6 +29,7 @@ function isPrime(num) {
 }
 
 // Function to check if a number is perfect
+// A perfect number is a positive integer that is equal to the sum of its proper divisors, excluding itself
 function isPerfect(num) {
   let sum = 1;
   for (let i = 2; i <= Math.sqrt(num); i++) {
@@ -41,6 +42,7 @@ function isPerfect(num) {
 }
 
 // Function to check if a number is an Armstrong number
+// An Armstrong number for a given number of digits is a number that is equal to the sum of its own digits each raised to the power of the number of digits.
 function isArmstrong(num) {
   const digits = num.toString().split('');
   const sum = digits.reduce((acc, digit) => acc + Math.pow(parseInt(digit), digits.length), 0);
@@ -49,19 +51,18 @@ function isArmstrong(num) {
 
 // Function to calculate the sum of the digits of a number (using absolute value)
 function getDigitSum(num) {
-  return Math.abs(num).toString().split('').reduce((acc, digit) => acc + parseInt(digit), 0);
+  const individualNumbers = Math.abs(num).toString().split('');
+  const numberSum = individualNumbers.reduce((acc, digit) => acc + parseInt(digit), 0);
+  return numberSum;
 }
 
 // API handler function
 export default async function handler(req, res) {
-  // Run the CORS middleware
   await runMiddleware(req, res, cors);
-
-  // Get the number from the query parameters
   const { number } = req.query;
 
-  // Validate the input to ensure it is a valid integer
-  if (!Number.isInteger(Number(number))) {
+  // Validate the input to ensure it is provided and is a valid integer
+  if (number === undefined || !Number.isInteger(Number(number))) {
     return res.status(400).json({ number, error: true });
   }
 
