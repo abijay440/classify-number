@@ -6,7 +6,7 @@ This is a simple API built with Next.js that classifies numbers and provides int
 
 1. Clone the repository:
 ```bash
-  git clone https://github.com/yourusername/your-repo.git
+  git clone https://github.com/abijay440/classify-number.git
   cd your-repo
 ```
 
